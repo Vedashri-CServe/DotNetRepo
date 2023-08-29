@@ -1,0 +1,65 @@
+# This is a basic workflow to help you get started with Actions
+
+name: net 6.0 build pipeline
+ 
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "design_development" ]
+  
+ 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# Providing permission for git  
+permissions:
+  contents: write
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+jobs:
+  build:
+    #runs-on: windows-latest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x  
+      
+      #- name: Upload artifact for deployment job
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: node-app
+      #    path: .
+      
+      - name: SonarQube Scan
+        run : |
+              echo "in sonar"
+      #   uses: sonarsource/sonarqube-scan-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          
+      # - name: Clean Up Scanner Folder
+      #   run: |
+      #        sudo rm -rf .scannerwork 
+      #        ls -a
+            
+      # - name: Fetch remote branches
+      #   run: git fetch origin     
+
+      # - name: Push code to check_sonar branch
+      #   run: |
+      #     git config --global user.name kareenaCserve
+      #     git config --global user.email kareena@cloudservesystems.com
+      #     git add . 
+      #     git status
+      #     git checkout check_sonar
+      #     git checkout design_dev .
+      #     git commit -m "Code for Sonar Check"
+      #     git push origin check_sonar
+           
