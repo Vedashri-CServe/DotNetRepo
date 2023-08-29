@@ -48,17 +48,14 @@ jobs:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         # run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="http://sonar.pathquest.com:9000/" /d:sonar.login="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"
-        run: |
-            echo ${{ secrets.SONAR_HOST_URL }}
-            echo SONAR_HOST_URL
-            dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="http://sonar.pathquest.com:9000/" /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"
+        run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
       - name: Build project
         run: dotnet build --configuration Release
 
       - name: SonarQube End Analysis
         # run: dotnet sonarscanner end /d:sonar.login="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"  
-        run: dotnet sonarscanner end /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda" 
+        run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
       
       #- name: Upload artifact for deployment job
