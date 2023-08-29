@@ -45,13 +45,13 @@ jobs:
         env:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url=${{ secrets.SONAR_HOST_URL }} /d:sonar.login=${{ secrets.SONAR_TOKEN }}
 
       - name: Build project
         run: dotnet build --configuration Release
 
       - name: SonarQube End Analysis
-        run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"   
+        run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}   
 
       # - name: Run SonarQube Scanner
       #   uses: SonarSource/sonarqube-scan-action@v2
