@@ -29,6 +29,22 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 6.0.x  
+
+      # - name: Restore dependencies
+      #   run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release
+
+      - name: Run SonarQube Scanner
+        uses: SonarSource/sonarqube-scan-action@v2
+        with:
+          projectKey: 'Setting_dotnet_tms'
+          projectName: 'Setting_dotnet_tms'
+          serverUrl: ${{ secrets.SONAR_HOST_URL }}
+          #'https://sonarqube.example.com'  # URL of your SonarQube instance
+          token: ${{ secrets.SONAR_TOKEN }}  # Add this secret in your GitHub repository
+     
       
       #- name: Upload artifact for deployment job
       #  uses: actions/upload-artifact@v2
