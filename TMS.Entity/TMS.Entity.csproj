@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Settings\CPAUser\**" />
+    <EmbeddedResource Remove="Settings\CPAUser\**" />
+    <None Remove="Settings\CPAUser\**" />
+  </ItemGroup>
+
+</Project>
