@@ -37,13 +37,13 @@ jobs:
         env:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: dotnet sonarscanner begin /k:mydotnetkey /d:sonar.host.url=${{ secrets.SONAR_HOST_URL }} /d:sonar.login=${{ secrets.SONAR_TOKEN }}
+        run: dotnet sonarscanner begin /k:"mydotnetkey" /d:sonar.host.url=http://sonar.pathquest.com:9000/ /d:sonar.login=sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda
 
       - name: Build project
         run: dotnet build --configuration Release
 
       - name: SonarQube End Analysis
-        run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}   
+        run: dotnet sonarscanner end /d:sonar.login=sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda   
 
       # - name: Run SonarQube Scanner
       #   uses: SonarSource/sonarqube-scan-action@v2
