@@ -32,7 +32,9 @@ jobs:
 
       # - name: Restore dependencies
       #   run: dotnet restore
-
+      - name: SonarQube scanner tool
+        run: dotnet tool install --global dotnet-sonarscanner
+        
       - name: SonarQube Analysis
         env:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
