@@ -42,26 +42,17 @@ jobs:
         run: dotnet tool install --global dotnet-sonarscanner
         
       - name: SonarQube Analysis
-        # env:
-        #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        env:
+           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="$SONAR_HOST_URL" /d:sonar.login="$SONAR_TOKEN"
 
       - name: Build project
         run: dotnet build --configuration Release
 
       - name: SonarQube End Analysis
-        run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"   
+        run: dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN "   
 
-      # - name: Run SonarQube Scanner
-      #   uses: SonarSource/sonarqube-scan-action@v2
-      #   with:
-      #     projectKey: 'Setting_dotnet_tms'
-      #     projectName: 'Setting_dotnet_tms'
-      #     serverUrl: ${{ secrets.SONAR_HOST_URL }}
-      #     #'https://sonarqube.example.com'  # URL of your SonarQube instance
-      #     token: ${{ secrets.SONAR_TOKEN }}  # Add this secret in your GitHub repository
-     
       
       #- name: Upload artifact for deployment job
       #  uses: actions/upload-artifact@v2
