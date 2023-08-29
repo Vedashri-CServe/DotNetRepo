@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+           fetch-depth: 0
 
       - name: Set up Java
         uses: actions/setup-java@v2
@@ -45,13 +47,18 @@ jobs:
         env:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="http://sonar.pathquest.com:9000/" /d:sonar.login="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"
+        # run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="http://sonar.pathquest.com:9000/" /d:sonar.login="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"
+        run: |
+            echo ${{ secrets.SONAR_HOST_URL }}
+            echo SONAR_HOST_URL
+            dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="http://sonar.pathquest.com:9000/" /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"
 
       - name: Build project
         run: dotnet build --configuration Release
 
       - name: SonarQube End Analysis
-        run: dotnet sonarscanner end /d:sonar.login="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"   
+        # run: dotnet sonarscanner end /d:sonar.login="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"  
+        run: dotnet sonarscanner end /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda" 
 
       
       #- name: Upload artifact for deployment job
@@ -60,18 +67,7 @@ jobs:
       #    name: node-app
       #    path: .
       
-      - name: SonarQube Scan
-        run : |
-              echo "in sonar"
-      #   uses: sonarsource/sonarqube-scan-action@master
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          
-      # - name: Clean Up Scanner Folder
-      #   run: |
-      #        sudo rm -rf .scannerwork 
-      #        ls -a
+    
             
       # - name: Fetch remote branches
       #   run: git fetch origin     
