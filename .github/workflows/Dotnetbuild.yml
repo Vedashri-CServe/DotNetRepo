@@ -18,7 +18,7 @@ permissions:
   
 jobs:
   DevCodeScan:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -57,7 +57,7 @@ jobs:
         
   SonarScanned:
     needs: DevCodeScan
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     # Git push steps to check_sonar branch
     steps:
             
