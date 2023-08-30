@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyVersion>2.1.0.0</AssemblyVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="AzureContainerHelper\**" />
+	  <EmbeddedResource Remove="AzureContainerHelper\**" />
+	  <None Remove="AzureContainerHelper\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Identity" Version="1.8.2" />
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.16.0" />
+		<PackageReference Include="ClosedXML" Version="0.101.0" />
+		<PackageReference Include="CryptSharp.Core" Version="3.0.0" />
+		<PackageReference Include="ereno.linux-x64.eugeneereno.System.Drawing" Version="6.1.1.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="SqlKata" Version="2.3.7" />
+		<PackageReference Include="SqlKata.Execution" Version="2.3.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\TMS.Auth\TMS.Auth.csproj" />
+		<ProjectReference Include="..\TMS.Entity\TMS.Entity.csproj" />
+	</ItemGroup>
+</Project>
