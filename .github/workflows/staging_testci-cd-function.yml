@@ -32,11 +32,15 @@ jobs:
           dotnet build --configuration Release --output ./output
           popd
 
+      - name: 'Publish Project'
+        run: dotnet publish --configuration Release --output ./published ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
         with:
           app-name: 'TestCI-CD-Function'
           slot-name: 'Production'
+          # package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FAE1777F43404CF2AEED4FAD38AF2167 }}
