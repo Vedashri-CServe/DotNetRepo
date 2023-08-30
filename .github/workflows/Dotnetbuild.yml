@@ -19,41 +19,41 @@ permissions:
 jobs:
   DevCodeScan:
     runs-on: windows-latest
-    # steps:
-    #   - name: Checkout repository
-    #     uses: actions/checkout@v2
-    #     with:
-    #        fetch-depth: 0
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+           fetch-depth: 0
            
-    #   - name: Set up Java
-    #     uses: actions/setup-java@v2
-    #     with:
-    #       distribution: 'adopt'
-    #       java-version: '17' 
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17' 
 
-    #   - name: Set up .NET SDK
-    #     uses: actions/setup-dotnet@v2
-    #     with:
-    #       dotnet-version: 6.0.x  
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x  
 
-    #   # - name: Restore dependencies
-    #   #   run: dotnet restore
-    #   - name: SonarQube scanner tool
-    #     run: dotnet tool install --global dotnet-sonarscanner
+      # - name: Restore dependencies
+      #   run: dotnet restore
+      - name: SonarQube scanner tool
+        run: dotnet tool install --global dotnet-sonarscanner
         
-    #   - name: SonarQube Analysis
-    #     env:
-    #        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    #        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-    #     # run: dotnet sonarscanner begin /k:"TMS_Stage_DOTNET" /d:sonar.host.url="http://sonar.pathquest.com:9000/" /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"
-    #     run: dotnet sonarscanner begin /k:"TMS_Stage_DOTNET" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      - name: SonarQube Analysis
+        env:
+           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        # run: dotnet sonarscanner begin /k:"TMS_Stage_DOTNET" /d:sonar.host.url="http://sonar.pathquest.com:9000/" /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"
+        run: dotnet sonarscanner begin /k:"TMS_Stage_DOTNET" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
-    #   - name: Build project
-    #     run: dotnet build --configuration Release
+      - name: Build project
+        run: dotnet build --configuration Release
 
-    #   - name: SonarQube End Analysis
-    #     # run: dotnet sonarscanner end /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"  
-    #     run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      - name: SonarQube End Analysis
+        # run: dotnet sonarscanner end /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"  
+        run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
         
   SonarScanned:
     needs: DevCodeScan
