@@ -15,18 +15,16 @@ on:
 permissions:
   contents: write
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-
+  
 jobs:
-  build:
+  DevCodeScan:
     runs-on: windows-latest
-
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
            fetch-depth: 0
-
+           
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
@@ -47,36 +45,32 @@ jobs:
         env:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        # run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="http://sonar.pathquest.com:9000/" /d:sonar.login="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"
-        run: dotnet sonarscanner begin /k:"DotNet_TMS_Stage" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+        # run: dotnet sonarscanner begin /k:"TMS_Stage_DOTNET" /d:sonar.host.url="http://sonar.pathquest.com:9000/" /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"
+        run: dotnet sonarscanner begin /k:"TMS_Stage_DOTNET" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
       - name: Build project
         run: dotnet build --configuration Release
 
       - name: SonarQube End Analysis
-        # run: dotnet sonarscanner end /d:sonar.login="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"  
+        # run: dotnet sonarscanner end /d:sonar.token="sqa_febb7b1417dcdaa9d170935a3f177d5a949bfdda"  
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-
-      
-      #- name: Upload artifact for deployment job
-      #  uses: actions/upload-artifact@v2
-      #  with:
-      #    name: node-app
-      #    path: .
-      
-    
+        
+  SonarScanned:
+    needs: DevCodeScan
+    runs-on: windows-latest
+    # Git push steps to check_sonar branch
+    steps:
             
-      # - name: Fetch remote branches
-      #   run: git fetch origin     
+      - name: Fetch remote branches
+        run: git fetch origin     
 
-      # - name: Push code to check_sonar branch
-      #   run: |
-      #     git config --global user.name kareenaCserve
-      #     git config --global user.email kareena@cloudservesystems.com
-      #     git add . 
-      #     git status
-      #     git checkout check_sonar
-      #     git checkout design_dev .
-      #     git commit -m "Code for Sonar Check"
-      #     git push origin check_sonar
-           
+      - name: Push code to check_sonar branch
+        run: |
+          git config --global user.name Vedashri-CServe
+          git config --global user.email vedashri@cloudservesystems.com
+          git add . 
+          git status
+          git checkout check_sonar
+          git checkout design_dev .
+          git commit -m "Sonar Check dotnet"
+          git push origin check_sonar
