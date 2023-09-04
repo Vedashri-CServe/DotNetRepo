@@ -1,0 +1,18 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "SecretKey": "f5ea77a2-acb6-4b1f-842e-7cbd39d0df60",
+    "AzureWebJobs.WorkplanRecurringFunction.Disabled": true,
+    "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=stagingfunctionsapp;AccountKey=NoTUMiUGXL4lSWwxXNblsaWrgtukrDbPIKOGCAQIXe8QBNUhuRpjL+kEiRE/pc0/vTBWWzEnib58+AStaENRsw==;EndpointSuffix=core.windows.net",
+    "DailyReportEmail": "bhumika.vyas@technomark.io"
+   },
+  "ConnectionStrings": {
+    // "MySqlConnectionString": "server=52.168.50.107; port=3306;user=tmsstag;database=tms_dev;password='X](llL8Xj8$b_!|q'",
+     "MySqlConnectionString": "server=20.235.124.147; port=3306;user=tmsstag;database=tms_dev;password='X](llL8Xj8$b_!|q'",
+   },
+  "Host": {
+    "CORS": "*"
+  }
+}
