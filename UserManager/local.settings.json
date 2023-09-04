@@ -5,7 +5,7 @@
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
     "SecretKey": "f5ea77a2-acb6-4b1f-842e-7cbd39d0df60",
     "AzureWebJobs.WorkplanRecurringFunction.Disabled": true,
-    "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=stagingfunctionsapp;AccountKey=NoTUMiUGXL4lSWwxXNblsaWrgtukrDbPIKOGCAQIXe8QBNUhuRpjL+kEiRE/pc0/vTBWWzEnib58+AStaENRsw==;EndpointSuffix=core.windows.net",
+    "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=teststaging95db;AccountKey=FVqplGOKJgIw4N473iKTjQBN807DWOLazk1g33Rz2Ah+VkUBVbvdpuYvtrTAADCCYR4CrZ+sbEZB+ASt6Ft0HQ==;EndpointSuffix=core.windows.net",
     "DailyReportEmail": "bhumika.vyas@technomark.io"
    },
   "ConnectionStrings": {
