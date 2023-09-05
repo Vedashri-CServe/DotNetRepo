@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
-# More GitHub Actions for Azure: https://github.com/Azure/actions  hii
-
 name: Build and deploy dotnet core app to Azure Function App - TestCI-CD-Function
 
 on:
@@ -30,17 +27,23 @@ jobs:
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build ./UserManager/UserManager.csproj --configuration Release --output ./output
+          dotnet build ./Help/Help.csproj --configuration Release --output ./output-help
           popd
 
-      # - name: 'Publish Project'
-      #   run: dotnet publish --configuration Release --output ./published ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-
-      - name: 'Run Azure Functions Action'
+      - name: 'Run Azure Functions Action for USerManager'
         uses: Azure/functions-action@v1
-        id: fa
         with:
           app-name: 'TestCI-CD-Function'
           slot-name: 'Production'
-          # package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FAE1777F43404CF2AEED4FAD38AF2167 }}
+
+      - name: 'Run Azure Functions Action for Help'
+        uses: Azure/functions-action@v1
+        id: fa
+        with:
+          app-name: 'TestCI-CD-help'
+          slot-name: 'Production'
+          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output-help'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_65427E122D35478FB906F4A1231CA6CC }}
+

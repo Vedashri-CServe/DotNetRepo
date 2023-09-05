@@ -5,7 +5,9 @@
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
     "SecretKey": "f5ea77a2-acb6-4b1f-842e-7cbd39d0df60",
     "AzureWebJobs.WorkplanRecurringFunction.Disabled": true,
+
     "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=teststaginga050;AccountKey=3i7Fn4rP96Ik+R1d/9q0P3NAnrC5fAPKrYVJAidekGJOTWWZpYRdDzj+HpNRWlhZX5ncbq/kw2Nq+AStE/VmFw==;EndpointSuffix=core.windows.net",
+
     "DailyReportEmail": "bhumika.vyas@technomark.io"
    },
   "ConnectionStrings": {
